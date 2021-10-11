@@ -1,6 +1,6 @@
 package com.company.quizappservice.dao;
 
-import com.company.quizappservice.model.User;
+import com.company.quizappservice.dto.User;
 
 import java.util.List;
 

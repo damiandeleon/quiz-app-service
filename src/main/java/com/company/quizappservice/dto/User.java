@@ -1,6 +1,11 @@
-package com.company.quizappservice.model;
+package com.company.quizappservice.dto;
+
+
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.util.Objects;
+
+
 
 public class User {
     private int id;
