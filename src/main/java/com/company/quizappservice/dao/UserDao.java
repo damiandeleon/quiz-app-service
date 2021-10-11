@@ -1,10 +1,11 @@
 package com.company.quizappservice.dao;
 
 import com.company.quizappservice.dto.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UserDao {
+public interface UserDao extends JpaRepository<User, Integer> {
 
     public User addUser(User user);
 
