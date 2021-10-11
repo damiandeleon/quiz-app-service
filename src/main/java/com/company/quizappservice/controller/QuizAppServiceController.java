@@ -1,6 +1,6 @@
 package com.company.quizappservice.controller;
 
-import com.company.quizappservice.dao.ScoreRepository;
+import com.company.quizappservice.dao.ScoreDao;
 import com.company.quizappservice.dao.UserDao;
 import com.company.quizappservice.dto.Score;
 import com.company.quizappservice.dto.User;
@@ -18,10 +18,10 @@ public class QuizAppServiceController {
     private UserDao userRepo;
 
     @Autowired
-    private ScoreRepository scoreRepo;
+    private ScoreDao scoreRepo;
 
 
-    @PostMapping(value = "/user")
+    @PostMapping("/user")
     @ResponseStatus(value = HttpStatus.OK)
     public User createUser(@RequestBody User user){
         userRepo.save(user);
@@ -33,7 +33,7 @@ public class QuizAppServiceController {
         return userRepo.findAll();
     }
 
-    @GetMapping(value = "/user/{id}")
+    @GetMapping("/user/{id}")
     public User getUserById(@PathVariable int id) {
         Optional<User> user = userRepo.findById(id);
 
@@ -43,7 +43,7 @@ public class QuizAppServiceController {
         return user.get();
     }
 
-    @PutMapping(value = "/user/{id}")
+    @PutMapping("/user/{id}")
     public void updateUser(@RequestBody User user, @PathVariable int id) {
         if(user.getId() == null)  {
             user.setId(id);
@@ -55,19 +55,19 @@ public class QuizAppServiceController {
         userRepo.save(user);
     }
 
-    @DeleteMapping(value = "user/{id}")
+    @DeleteMapping("user/{id}")
     public void deleteUser(@PathVariable int id) {
         userRepo.deleteById(id);
     }
 
-    @PostMapping(value = "/score")
+    @PostMapping("/score")
     @ResponseStatus(value = HttpStatus.OK)
     public Score createScore(@RequestBody Score score) {
         scoreRepo.save(score);
         return score;
     }
 
-    @GetMapping
+    @GetMapping("/score")
     public List<Score> getAllScores(){
         return scoreRepo.findAll();
     }

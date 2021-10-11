@@ -1,18 +1,25 @@
 package com.company.quizappservice.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
+import javax.persistence.*;
 import java.util.Objects;
 
-
-
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "user")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
+
+    public User()
+    {};
 
     public User(int id, String username, String password, String firstName, String lastName) {
         this.id = id;

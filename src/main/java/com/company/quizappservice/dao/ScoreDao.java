@@ -2,10 +2,12 @@ package com.company.quizappservice.dao;
 
 import com.company.quizappservice.dto.Score;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface ScoreRepository extends JpaRepository<Score, Integer> {
+@Repository
+public interface ScoreDao extends JpaRepository<Score, Integer> {
 
     List<Score> findScoreById(Integer userId);
 }
