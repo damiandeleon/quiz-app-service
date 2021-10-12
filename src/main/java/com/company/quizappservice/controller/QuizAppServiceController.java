@@ -22,13 +22,13 @@ public class QuizAppServiceController {
 
 
     @PostMapping("/user")
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.CREATED)
     public User createUser(@RequestBody User user){
         userRepo.save(user);
         return user;
     }
 
-    @GetMapping
+    @GetMapping("/user")
     public List<User> getAllUsers() {
         return userRepo.findAll();
     }
@@ -61,7 +61,7 @@ public class QuizAppServiceController {
     }
 
     @PostMapping("/score")
-    @ResponseStatus(value = HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.CREATED)
     public Score createScore(@RequestBody Score score) {
         scoreRepo.save(score);
         return score;
