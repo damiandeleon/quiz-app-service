@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @RestController
 public class QuizAppServiceController {
+
+
 
     @Autowired
     private UserDao userRepo;
@@ -70,6 +74,18 @@ public class QuizAppServiceController {
     @GetMapping("/score")
     public List<Score> getAllScores(){
         return scoreRepo.findAll();
+    }
+
+    @GetMapping("/login")
+    public User getUserId(@RequestBody User user){
+
+
+//        User user = new User();
+        String username = user.getUsername();
+        String password = user.getPassword();
+        User loginUser =  userRepo.findByUsernameAndPassword(username, password);
+        System.out.println(loginUser);
+        return loginUser;
     }
 
 
