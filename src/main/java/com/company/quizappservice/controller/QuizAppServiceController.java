@@ -55,7 +55,7 @@ public class QuizAppServiceController {
         userRepo.save(user);
     }
 
-    @DeleteMapping("user/{id}")
+    @DeleteMapping("/user/{id}")
     public void deleteUser(@PathVariable int id) {
         userRepo.deleteById(id);
     }

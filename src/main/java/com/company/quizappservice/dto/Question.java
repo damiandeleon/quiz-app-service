@@ -16,8 +16,11 @@ public class Question {
     private Integer id;
     private Integer quizId;
 
+    private String question;
     private String correctAns;
-    private String[] wrongAns;
+    private String wrongAns1;
+    private String wrongAns2;
+    private String wrongAns3;
 
     public Integer getId() {
         return id;
@@ -35,6 +38,14 @@ public class Question {
         this.quizId = quizId;
     }
 
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
     public String getCorrectAns() {
         return correctAns;
     }
@@ -43,27 +54,41 @@ public class Question {
         this.correctAns = correctAns;
     }
 
-    public String[] getWrongAns() {
-        return wrongAns;
+    public String getWrongAns1() {
+        return wrongAns1;
     }
 
-    public void setWrongAns(String[] wrongAns) {
-        this.wrongAns = wrongAns;
+    public void setWrongAns1(String wrongAns1) {
+        this.wrongAns1 = wrongAns1;
+    }
+
+    public String getWrongAns2() {
+        return wrongAns2;
+    }
+
+    public void setWrongAns2(String wrongAns2) {
+        this.wrongAns2 = wrongAns2;
+    }
+
+    public String getWrongAns3() {
+        return wrongAns3;
+    }
+
+    public void setWrongAns3(String wrongAns3) {
+        this.wrongAns3 = wrongAns3;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Question question = (Question) o;
-        return Objects.equals(id, question.id) && Objects.equals(quizId, question.quizId) && Objects.equals(correctAns, question.correctAns) && Arrays.equals(wrongAns, question.wrongAns);
+        Question question1 = (Question) o;
+        return Objects.equals(id, question1.id) && Objects.equals(quizId, question1.quizId) && Objects.equals(question, question1.question) && Objects.equals(correctAns, question1.correctAns) && Objects.equals(wrongAns1, question1.wrongAns1) && Objects.equals(wrongAns2, question1.wrongAns2) && Objects.equals(wrongAns3, question1.wrongAns3);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, quizId, correctAns);
-        result = 31 * result + Arrays.hashCode(wrongAns);
-        return result;
+        return Objects.hash(id, quizId, question, correctAns, wrongAns1, wrongAns2, wrongAns3);
     }
 
     @Override
@@ -71,8 +96,11 @@ public class Question {
         return "Question{" +
                 "id=" + id +
                 ", quizId=" + quizId +
+                ", question='" + question + '\'' +
                 ", correctAns='" + correctAns + '\'' +
-                ", wrongAns=" + Arrays.toString(wrongAns) +
+                ", wrongAns1='" + wrongAns1 + '\'' +
+                ", wrongAns2='" + wrongAns2 + '\'' +
+                ", wrongAns3='" + wrongAns3 + '\'' +
                 '}';
     }
 }
