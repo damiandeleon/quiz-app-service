@@ -14,6 +14,7 @@ import java.util.Optional;
 
 
 @RestController
+@CrossOrigin
 public class QuizAppServiceController {
 
 
@@ -87,6 +88,5 @@ public class QuizAppServiceController {
         System.out.println(loginUser);
         return loginUser;
     }
-
 
 }
