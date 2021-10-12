@@ -61,4 +61,14 @@ public class Score {
     public int hashCode() {
         return Objects.hash(id, userId, quizId, scorePercent);
     }
+
+    @Override
+    public String toString() {
+        return "Score{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", quizId=" + quizId +
+                ", scorePercent='" + scorePercent + '\'' +
+                '}';
+    }
 }
