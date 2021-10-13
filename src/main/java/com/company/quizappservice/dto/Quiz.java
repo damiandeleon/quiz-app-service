@@ -14,7 +14,7 @@ public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String name;
+    private String quizName;
     private String category;
     private String level;
 
@@ -30,11 +30,11 @@ public class Quiz {
     }
 
     public String getName() {
-        return name;
+        return quizName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String quizName) {
+        this.quizName = quizName;
     }
 
     public String getCategory() {
@@ -66,19 +66,19 @@ public class Quiz {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Quiz quiz = (Quiz) o;
-        return Objects.equals(id, quiz.id) && Objects.equals(name, quiz.name) && Objects.equals(category, quiz.category) && Objects.equals(level, quiz.level) && Objects.equals(question, quiz.question);
+        return Objects.equals(id, quiz.id) && Objects.equals(quizName, quiz.quizName) && Objects.equals(category, quiz.category) && Objects.equals(level, quiz.level) && Objects.equals(question, quiz.question);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, category, level, question);
+        return Objects.hash(id, quizName, category, level, question);
     }
 
     @Override
     public String toString() {
         return "Quiz{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", quizName='" + quizName + '\'' +
                 ", category='" + category + '\'' +
                 ", level='" + level + '\'' +
                 ", question=" + question +
