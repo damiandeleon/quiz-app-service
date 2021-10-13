@@ -37,6 +37,7 @@ public class QuizAppServiceController {
     @PostMapping("/quiz")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Quiz createQuiz(@RequestBody Quiz quiz){
+        System.out.println(quiz);
         quizRepo.save(quiz);
         return quiz;
     }

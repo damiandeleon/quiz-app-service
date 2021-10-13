@@ -37,7 +37,7 @@ public class QuestionDaoTest {
 
         Quiz quiz = new Quiz();
 
-        quiz.setName("Quiz One");
+        quiz.setQuizName("Quiz One");
         quiz.setCategory("Java");
         quiz.setLevel("Easy");
 

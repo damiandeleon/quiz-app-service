@@ -12,7 +12,6 @@ public interface QuizDao extends JpaRepository<Quiz, Integer> {
     List<Quiz> findByCategory(String category);
     List<Quiz> findByLevel(String level);
     List<Quiz> findByCategoryAndLevel(String category, String level);
-
     List<Quiz> findAll();
 
 }

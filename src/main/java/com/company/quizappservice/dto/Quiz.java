@@ -17,7 +17,7 @@ public class Quiz {
     private String quizName;
     private String category;
     private String level;
-
+    private Integer userId;
     @OneToMany(mappedBy = "quizId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Question> question;
 
@@ -29,11 +29,11 @@ public class Quiz {
         this.id = id;
     }
 
-    public String getName() {
+    public String getQuizName() {
         return quizName;
     }
 
-    public void setName(String quizName) {
+    public void setQuizName(String quizName) {
         this.quizName = quizName;
     }
 
@@ -53,6 +53,14 @@ public class Quiz {
         this.level = level;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     public Set<Question> getQuestion() {
         return question;
     }
@@ -66,12 +74,12 @@ public class Quiz {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Quiz quiz = (Quiz) o;
-        return Objects.equals(id, quiz.id) && Objects.equals(quizName, quiz.quizName) && Objects.equals(category, quiz.category) && Objects.equals(level, quiz.level) && Objects.equals(question, quiz.question);
+        return Objects.equals(id, quiz.id) && Objects.equals(quizName, quiz.quizName) && Objects.equals(category, quiz.category) && Objects.equals(level, quiz.level) && Objects.equals(userId, quiz.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, quizName, category, level, question);
+        return Objects.hash(id, quizName, category, level, userId);
     }
 
     @Override
@@ -81,6 +89,7 @@ public class Quiz {
                 ", quizName='" + quizName + '\'' +
                 ", category='" + category + '\'' +
                 ", level='" + level + '\'' +
+                ", userId=" + userId +
                 ", question=" + question +
                 '}';
     }

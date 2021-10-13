@@ -32,7 +32,7 @@ public class QuizDaoTest {
     public void shouldAddAndFindByCategory() {
         Quiz quiz = new Quiz();
 
-        quiz.setName("Quiz One");
+        quiz.setQuizName("Quiz One");
         quiz.setCategory("Java");
         quiz.setLevel("Easy");
 
@@ -40,7 +40,7 @@ public class QuizDaoTest {
 
         Quiz quiz2 = new Quiz();
 
-        quiz2.setName("Quiz Two");
+        quiz2.setQuizName("Quiz Two");
         quiz2.setCategory("Java");
         quiz2.setLevel("Medium");
 
@@ -48,7 +48,7 @@ public class QuizDaoTest {
 
         Quiz quiz3 = new Quiz();
 
-        quiz3.setName("Quiz Three");
+        quiz3.setQuizName("Quiz Three");
         quiz3.setCategory("Node");
         quiz3.setLevel("Easy");
 
@@ -67,7 +67,7 @@ public class QuizDaoTest {
     public void shouldAddAndFindByLevel() {
         Quiz quiz = new Quiz();
 
-        quiz.setName("Quiz One");
+        quiz.setQuizName("Quiz One");
         quiz.setCategory("Java");
         quiz.setLevel("Easy");
 
@@ -75,7 +75,7 @@ public class QuizDaoTest {
 
         Quiz quiz2 = new Quiz();
 
-        quiz2.setName("Quiz Two");
+        quiz2.setQuizName("Quiz Two");
         quiz2.setCategory("Java");
         quiz2.setLevel("Medium");
 
@@ -83,7 +83,7 @@ public class QuizDaoTest {
 
         Quiz quiz3 = new Quiz();
 
-        quiz3.setName("Quiz Three");
+        quiz3.setQuizName("Quiz Three");
         quiz3.setCategory("Node");
         quiz3.setLevel("Easy");
 
@@ -102,7 +102,7 @@ public class QuizDaoTest {
     public void shouldAddAndFindByCategoryAndLevel() {
         Quiz quiz = new Quiz();
 
-        quiz.setName("Quiz One");
+        quiz.setQuizName("Quiz One");
         quiz.setCategory("Java");
         quiz.setLevel("Easy");
 
@@ -110,7 +110,7 @@ public class QuizDaoTest {
 
         Quiz quiz2 = new Quiz();
 
-        quiz2.setName("Quiz Two");
+        quiz2.setQuizName("Quiz Two");
         quiz2.setCategory("Java");
         quiz2.setLevel("Medium");
 
@@ -118,7 +118,7 @@ public class QuizDaoTest {
 
         Quiz quiz3 = new Quiz();
 
-        quiz3.setName("Quiz Three");
+        quiz3.setQuizName("Quiz Three");
         quiz3.setCategory("Node");
         quiz3.setLevel("Easy");
 
