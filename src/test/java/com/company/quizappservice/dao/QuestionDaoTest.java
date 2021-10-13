@@ -47,10 +47,10 @@ public class QuestionDaoTest {
 
         ques1.setQuizId(quiz.getId());
         ques1.setQuestion("What is Java?");
-        ques1.setCorrectAns("A rad programming language.");
-        ques1.setWrongAns1("A name for coffee.");
-        ques1.setWrongAns2("A name for a band.");
-        ques1.setWrongAns3("None of your business");
+        ques1.setCorrectAnswer("A rad programming language.");
+        ques1.setWrongAnswerOne("A name for coffee.");
+        ques1.setWrongAnswerTwo("A name for a band.");
+        ques1.setWrongAnswerThree("None of your business");
 
         questionDao.save(ques1);
 
@@ -58,10 +58,10 @@ public class QuestionDaoTest {
 
         ques2.setQuizId(quiz.getId());
         ques2.setQuestion("What is Spring Boot?");
-        ques2.setCorrectAns("A rad framework.");
-        ques2.setWrongAns1("A name for shoes.");
-        ques2.setWrongAns2("What you get in the month of March.");
-        ques2.setWrongAns3("I wish I knew");
+        ques2.setCorrectAnswer("A rad framework.");
+        ques2.setWrongAnswerOne("A name for shoes.");
+        ques2.setWrongAnswerTwo("What you get in the month of March.");
+        ques2.setWrongAnswerThree("I wish I knew");
 
         questionDao.save(ques2);
 

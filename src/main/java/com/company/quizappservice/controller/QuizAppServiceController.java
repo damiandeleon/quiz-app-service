@@ -52,10 +52,10 @@ public class QuizAppServiceController {
         for(Question question : questionList){
             question.setQuizId(quizId);
             question.setQuestion(question.getQuestion());
-            question.setCorrectAns(question.getCorrectAns());
-            question.setWrongAns1(question.getWrongAns1());
-            question.setWrongAns2(question.getWrongAns2());
-            question.setWrongAns3(question.getWrongAns3());
+            question.setCorrectAnswer(question.getCorrectAnswer());
+            question.setWrongAnswerOne(question.getWrongAnswerOne());
+            question.setWrongAnswerTwo(question.getWrongAnswerTwo());
+            question.setWrongAnswerThree(question.getWrongAnswerThree());
             System.out.println(question);
             questionRepo.save(question);
         }

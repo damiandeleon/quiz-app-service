@@ -17,10 +17,10 @@ public class Question {
     private Integer quizId;
 
     private String question;
-    private String correctAns;
-    private String wrongAns1;
-    private String wrongAns2;
-    private String wrongAns3;
+    private String correctAnswer;
+    private String wrongAnswerOne;
+    private String wrongAnswerTwo;
+    private String wrongAnswerThree;
 
     public Integer getId() {
         return id;
@@ -46,36 +46,36 @@ public class Question {
         this.question = question;
     }
 
-    public String getCorrectAns() {
-        return correctAns;
+    public String getCorrectAnswer() {
+        return correctAnswer;
     }
 
-    public void setCorrectAns(String correctAns) {
-        this.correctAns = correctAns;
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
     }
 
-    public String getWrongAns1() {
-        return wrongAns1;
+    public String getWrongAnswerOne() {
+        return wrongAnswerOne;
     }
 
-    public void setWrongAns1(String wrongAns1) {
-        this.wrongAns1 = wrongAns1;
+    public void setWrongAnswerOne(String wrongAnswerOne) {
+        this.wrongAnswerOne = wrongAnswerOne;
     }
 
-    public String getWrongAns2() {
-        return wrongAns2;
+    public String getWrongAnswerTwo() {
+        return wrongAnswerTwo;
     }
 
-    public void setWrongAns2(String wrongAns2) {
-        this.wrongAns2 = wrongAns2;
+    public void setWrongAnswerTwo(String wrongAnswerTwo) {
+        this.wrongAnswerTwo = wrongAnswerTwo;
     }
 
-    public String getWrongAns3() {
-        return wrongAns3;
+    public String getWrongAnswerThree() {
+        return wrongAnswerThree;
     }
 
-    public void setWrongAns3(String wrongAns3) {
-        this.wrongAns3 = wrongAns3;
+    public void setWrongAnswerThree(String wrongAnswerThree) {
+        this.wrongAnswerThree = wrongAnswerThree;
     }
 
     @Override
@@ -83,12 +83,12 @@ public class Question {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Question question1 = (Question) o;
-        return Objects.equals(id, question1.id) && Objects.equals(quizId, question1.quizId) && Objects.equals(question, question1.question) && Objects.equals(correctAns, question1.correctAns) && Objects.equals(wrongAns1, question1.wrongAns1) && Objects.equals(wrongAns2, question1.wrongAns2) && Objects.equals(wrongAns3, question1.wrongAns3);
+        return Objects.equals(id, question1.id) && Objects.equals(quizId, question1.quizId) && Objects.equals(question, question1.question) && Objects.equals(correctAnswer, question1.correctAnswer) && Objects.equals(wrongAnswerOne, question1.wrongAnswerOne) && Objects.equals(wrongAnswerTwo, question1.wrongAnswerTwo) && Objects.equals(wrongAnswerThree, question1.wrongAnswerThree);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, quizId, question, correctAns, wrongAns1, wrongAns2, wrongAns3);
+        return Objects.hash(id, quizId, question, correctAnswer, wrongAnswerOne, wrongAnswerTwo, wrongAnswerThree);
     }
 
     @Override
@@ -97,10 +97,10 @@ public class Question {
                 "id=" + id +
                 ", quizId=" + quizId +
                 ", question='" + question + '\'' +
-                ", correctAns='" + correctAns + '\'' +
-                ", wrongAns1='" + wrongAns1 + '\'' +
-                ", wrongAns2='" + wrongAns2 + '\'' +
-                ", wrongAns3='" + wrongAns3 + '\'' +
+                ", correctAnswer='" + correctAnswer + '\'' +
+                ", wrongAnswerOne='" + wrongAnswerOne + '\'' +
+                ", wrongAnswerTwo='" + wrongAnswerTwo + '\'' +
+                ", wrongAnswerThree='" + wrongAnswerThree + '\'' +
                 '}';
     }
 }
