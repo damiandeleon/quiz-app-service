@@ -8,11 +8,12 @@ import java.util.Set;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@SequenceGenerator(name = "PRIVATE_SEQ", sequenceName="quiz_sequence")
 @Table(name = "quiz")
 public class Quiz {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PRIVATE_SEQ")
     private Integer id;
     private String quizName;
     private String category;
