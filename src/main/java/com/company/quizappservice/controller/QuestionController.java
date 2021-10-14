@@ -21,7 +21,7 @@ public class QuestionController {
     @Autowired
     private QuizDao quizRepo;
 
-    @CrossOrigin
+
     @PostMapping("/question")
     @ResponseStatus(value = HttpStatus.CREATED)
     public List<Question> createQuestion(@RequestBody List<Question> questionList){

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,7 +16,7 @@ public class QuizController {
     @Autowired
     private QuizDao quizRepo;
 
-    @CrossOrigin
+
     @PostMapping("/quiz")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Quiz createQuiz(@RequestBody Quiz quiz){
@@ -26,7 +25,6 @@ public class QuizController {
         return quiz;
     }
 
-    @CrossOrigin
     @GetMapping("/quiz/{id}")
     public Optional<Quiz> getQuiz(@PathVariable Integer id){
 
@@ -35,8 +33,4 @@ public class QuizController {
         return returnQuiz;
     }
 
-    @GetMapping("/quiz")
-    public List<Quiz> getAllQuizzes() {
-        return quizRepo.findAll();
-    }
 }

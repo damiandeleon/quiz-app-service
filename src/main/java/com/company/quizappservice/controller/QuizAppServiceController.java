@@ -14,7 +14,7 @@ public class QuizAppServiceController {
     @Autowired
     private UserDao userRepo;
 
-    @CrossOrigin
+
     @PostMapping("/login")
     public User getUserId(@RequestBody User user){
         String username = user.getUsername();

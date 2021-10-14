@@ -15,14 +15,14 @@ public class ScoreController {
     @Autowired
     private ScoreDao scoreRepo;
 
-    @CrossOrigin
+
     @PostMapping("/score")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Score createScore(@RequestBody Score score) {
         scoreRepo.save(score);
         return score;
     }
-    @CrossOrigin
+
     @GetMapping("/score")
     public List<Score> getAllScores(){
         return scoreRepo.findAll();
