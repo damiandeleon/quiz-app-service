@@ -4,6 +4,7 @@ import com.company.quizappservice.dao.QuestionDao;
 import com.company.quizappservice.dao.QuizDao;
 import com.company.quizappservice.dto.Question;
 import com.company.quizappservice.dto.Quiz;
+import com.company.quizappservice.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,9 @@ public class QuestionController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public List<Question> createQuestion(@RequestBody List<Question> questionList){
         List<Quiz> quizSet = quizRepo.findAll();
-        Quiz lastQuiz = quizSet.get(quizSet.size() - 1);
-        Integer quizId = lastQuiz.getId();
+        Integer quizId = quizSet.size()+1;
+//        Quiz lastQuiz = quizSet.get(quizSet.size());
+//        Integer quizId = lastQuiz.getId();
 
         for(Question question : questionList){
             question.setQuizId(quizId);
@@ -39,5 +41,10 @@ public class QuestionController {
             questionRepo.save(question);
         }
         return questionList;
+    }
+
+    @GetMapping("/question")
+    public List<Question> getAllQuestions() {
+        return questionRepo.findAll();
     }
 }

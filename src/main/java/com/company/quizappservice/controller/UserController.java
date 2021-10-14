@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class UserController {
 
     @PostMapping("/user")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public User createUser(@RequestBody User user){
+    public User createUser(@RequestBody @Valid User user){
         userRepo.save(user);
         return user;
     }

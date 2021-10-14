@@ -2,6 +2,7 @@ package com.company.quizappservice.controller;
 
 import com.company.quizappservice.dao.QuizDao;
 import com.company.quizappservice.dto.Quiz;
+import com.company.quizappservice.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +25,6 @@ public class QuizController {
         return quiz;
     }
 
-
     @GetMapping("/quiz/{id}")
     public Optional<Quiz> getQuiz(@PathVariable Integer id){
 
@@ -32,4 +32,5 @@ public class QuizController {
 
         return returnQuiz;
     }
+
 }
