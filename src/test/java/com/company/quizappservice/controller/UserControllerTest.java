@@ -23,6 +23,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class UserControllerTest {
 
+// *****  ATTENTION!!! MUST DROP MYSQL SCHEMAS AND RESTART POSTMAN/INSOMNIA BEFORE RUNNING TEST ****
+
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -35,7 +38,6 @@ public class UserControllerTest {
     @Test
     public void shouldCreateAUserWithPostCommand() throws Exception {
         User user = new User();
-        user.setId(2);
         user.setUsername("LynnNose");
         user.setFirstName("Lynn");
         user.setLastName("Nose");
@@ -92,9 +94,23 @@ public class UserControllerTest {
 
     @Test
     public void shouldDeleteUserById() throws Exception{
+
+    User user = new User();
+    user.setFirstName("Damian");
+    user.setLastName("Deleon");
+    user.setUsername("damiandeleon");
+    user.setPassword("password");
+
+    String jsonInput = mapper.writeValueAsString(user);
+
         mockMvc.perform(
-                        delete("/user/2")
-                )
+        post("/user")
+                .content(jsonInput)
+                .contentType(MediaType.APPLICATION_JSON)
+        );
+
+        mockMvc.perform(
+        delete("/user/1"))
                 .andExpect(status().isOk());
     }
 }

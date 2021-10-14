@@ -3,6 +3,7 @@ package com.company.quizappservice.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -10,14 +11,18 @@ import java.util.Objects;
 @Table(name = "user")
 public class User {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @NotNull(message = "a username must be provided")
+    @Column(unique = true)
     private String username;
+    @NotNull(message = "a password must be provided")
     private String password;
+    @NotNull(message = "a First Name must be provided")
     private String firstName;
+    @NotNull(message = "a Last Name must be provided")
     private String lastName;
 
     public User()
