@@ -3,6 +3,7 @@ package com.company.quizappservice.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class Quiz {
     private String level;
     private Integer userId;
     @OneToMany(mappedBy = "quizId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Question> question;
+    private List<Question> question;
 
     public Integer getId() {
         return id;
@@ -61,11 +62,11 @@ public class Quiz {
         this.userId = userId;
     }
 
-    public Set<Question> getQuestion() {
+    public List<Question> getQuestion() {
         return question;
     }
 
-    public void setQuestion(Set<Question> question) {
+    public void setQuestion(List<Question> question) {
         this.question = question;
     }
 

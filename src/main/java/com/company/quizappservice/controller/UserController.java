@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     private UserDao userRepo;
 
-    @CrossOrigin
+
     @PostMapping("/user")
     @ResponseStatus(value = HttpStatus.CREATED)
     public User createUser(@RequestBody User user){
@@ -40,7 +40,7 @@ public class UserController {
         return user.get();
     }
 
-    @CrossOrigin
+
     @PutMapping("/user/{id}")
     public void updateUser(@RequestBody User user, @PathVariable int id) {
         if(user.getId() == null)  {
@@ -52,7 +52,7 @@ public class UserController {
         userRepo.save(user);
     }
 
-    @CrossOrigin
+
     @DeleteMapping("/user/{id}")
     public void deleteUser(@PathVariable int id) {
         userRepo.deleteById(id);
