@@ -21,7 +21,9 @@ public class User {
     private String lastName;
 
     public User()
-    {};
+    {}
+
+
 
     public User(int id, String username, String password, String firstName, String lastName) {
         this.id = id;

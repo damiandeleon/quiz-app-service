@@ -2,6 +2,7 @@ package com.company.quizappservice.controller;
 import com.company.quizappservice.dao.UserDao;
 import com.company.quizappservice.dto.User;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class QuizAppServiceController {
 
-    @UpdateTimestamp
+    @Autowired
     private UserDao userRepo;
 
     @CrossOrigin
