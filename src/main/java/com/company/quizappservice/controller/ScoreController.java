@@ -30,18 +30,21 @@ public class ScoreController {
     }
 
 
+
+   
     @GetMapping("/score/quiz/{quizId}")
     public List<Score> getScoreByQuizId(@PathVariable int quizId){
-        List<Score> userScore = new ArrayList<>();
-        userScore = scoreRepo.findScoreByQuizId(quizId);
-        return userScore;
+        List<Score> score = scoreRepo.findListOfScoreByQuizId(quizId);
+        return score;
+
     }
 
     @GetMapping("/score/user/{userId}")
     public List<Score> getScoreByUserId(@PathVariable int userId){
-        List<Score> userScore = new ArrayList<>();
-        userScore = scoreRepo.findListOfScoreByUserId(userId);
-        return userScore;
+
+        List<Score> score = scoreRepo.findListOfScoreByUserId(userId);
+        return score;
+
     }
 
 }

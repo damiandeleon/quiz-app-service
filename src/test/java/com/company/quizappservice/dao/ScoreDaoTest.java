@@ -35,36 +35,36 @@ public class ScoreDaoTest {
 
     //Test findScoreByUserId
 
-
-    @Test
-    public void shouldReturnScoreByUserId() {
-
-        User testUser = new User();
-        testUser.setId(1);
-        testUser.setUsername("LynnMyers");
-        testUser.setFirstName("Lynn");
-        testUser.setLastName("Myers");
-        testUser.setPassword("password1");
-        userDao.save(testUser);
-
-        Score testScore = new Score();
-        testScore.setScore(95);
-        testScore.setUserId(1);
-        testScore.setQuizId(1);
-        scoreDao.save(testScore);
-
-        Quiz quiz = new Quiz();
-        quiz.setId(1);
-        quiz.setQuizName("Quiz One");
-        quiz.setCategory("Java");
-        quiz.setLevel("Easy");
-        quizDao.save(quiz);
-
-        Score findScoreByUID = testScore;
-        Score findScoreByQID = testScore;
-
-        assertEquals(findScoreByUID, scoreDao.findScoreByUserId(1));
-        assertEquals(findScoreByQID, scoreDao.findScoreByQuizId(1));
-
-    }
+//
+//    @Test
+//    public void shouldReturnScoreByUserId() {
+//
+//        User testUser = new User();
+//        testUser.setId(1);
+//        testUser.setUsername("LynnMyers");
+//        testUser.setFirstName("Lynn");
+//        testUser.setLastName("Myers");
+//        testUser.setPassword("password1");
+//        userDao.save(testUser);
+//
+//        Score testScore = new Score();
+//        testScore.setScore(95);
+//        testScore.setUserId(1);
+//        testScore.setQuizId(1);
+//        scoreDao.save(testScore);
+//
+//        Quiz quiz = new Quiz();
+//        quiz.setId(1);
+//        quiz.setQuizName("Quiz One");
+//        quiz.setCategory("Java");
+//        quiz.setLevel("Easy");
+//        quizDao.save(quiz);
+//
+//        Score findScoreByUID = testScore;
+//        Score findScoreByQID = testScore;
+//
+//        assertEquals(findScoreByUID, scoreDao.findScoreByUserId(1));
+//        assertEquals(findScoreByQID, scoreDao.findScoreByQuizId(1));
+//
+//    }
 }
