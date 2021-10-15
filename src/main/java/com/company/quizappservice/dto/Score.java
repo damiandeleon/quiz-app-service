@@ -17,6 +17,9 @@ public class Score {
     private Integer userId;
     private Integer quizId;
     private Integer score;
+    @OneToOne
+    @JoinColumn(name = "quizId", nullable = false, insertable = false, updatable = false)
+    private Quiz quiz;
 
 
 
@@ -52,17 +55,25 @@ public class Score {
         this.score = score;
     }
 
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Score score1 = (Score) o;
-        return Objects.equals(id, score1.id) && Objects.equals(userId, score1.userId) && Objects.equals(quizId, score1.quizId) && Objects.equals(score, score1.score);
+        return Objects.equals(id, score1.id) && Objects.equals(userId, score1.userId) && Objects.equals(quizId, score1.quizId) && Objects.equals(score, score1.score) && Objects.equals(quiz, score1.quiz);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, quizId, score);
+        return Objects.hash(id, userId, quizId, score, quiz);
     }
 
     @Override
@@ -72,6 +83,7 @@ public class Score {
                 ", userId=" + userId +
                 ", quizId=" + quizId +
                 ", score=" + score +
+                ", quiz=" + quiz +
                 '}';
     }
 }
