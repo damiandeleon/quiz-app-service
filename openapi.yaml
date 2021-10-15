@@ -1,0 +1,365 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:2121
+    description: Generated server url
+paths:
+  /user/{id}:
+    get:
+      tags:
+        - user-controller
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      tags:
+        - user-controller
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags:
+        - user-controller
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+  /user:
+    get:
+      tags:
+        - user-controller
+      operationId: getAllUsers
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      tags:
+        - user-controller
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+  /score:
+    get:
+      tags:
+        - score-controller
+      operationId: getAllScores
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Score'
+    post:
+      tags:
+        - score-controller
+      operationId: createScore
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Score'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Score'
+  /quiz:
+    get:
+      tags:
+        - quiz-controller
+      operationId: getAllQuizzes
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Quiz'
+    post:
+      tags:
+        - quiz-controller
+      operationId: createQuiz
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Quiz'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Quiz'
+  /question:
+    get:
+      tags:
+        - question-controller
+      operationId: getAllQuestions
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Question'
+    post:
+      tags:
+        - question-controller
+      operationId: createQuestion
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Question'
+        required: true
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Question'
+  /login:
+    post:
+      tags:
+        - quiz-app-service-controller
+      operationId: getUserId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/User'
+  /score/user/{userId}:
+    get:
+      tags:
+        - score-controller
+      operationId: getScoreByUserId
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Score'
+  /score/quiz/{quizId}:
+    get:
+      tags:
+        - score-controller
+      operationId: getScoreByQuizId
+      parameters:
+        - name: quizId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Score'
+  /quiz/{id}:
+    get:
+      tags:
+        - quiz-controller
+      operationId: getQuiz
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Quiz'
+  /quiz/user/{id}:
+    get:
+      tags:
+        - quiz-controller
+      operationId: getQuizzesByUserId
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Quiz'
+components:
+  schemas:
+    User:
+      required:
+        - firstName
+        - lastName
+        - password
+        - username
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        username:
+          type: string
+        password:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+    Question:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        quizId:
+          type: integer
+          format: int32
+        question:
+          type: string
+        correctAnswer:
+          type: string
+        wrongAnswerOne:
+          type: string
+        wrongAnswerTwo:
+          type: string
+        wrongAnswerThree:
+          type: string
+    Quiz:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        quizName:
+          type: string
+        category:
+          type: string
+        level:
+          type: string
+        userId:
+          type: integer
+          format: int32
+        question:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+    Score:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        quizId:
+          type: integer
+          format: int32
+        score:
+          type: integer
+          format: int32
+        quiz:
+          $ref: '#/components/schemas/Quiz'
