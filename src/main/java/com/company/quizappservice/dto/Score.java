@@ -15,7 +15,7 @@ public class Score {
     private Integer id;
     private Integer userId;
     private Integer quizId;
-    private String scorePercent;
+    private Integer score;
 
     public Integer getId() {
         return id;
@@ -41,25 +41,25 @@ public class Score {
         this.quizId = quizId;
     }
 
-    public String getScorePercent() {
-        return scorePercent;
+    public Integer getScore() {
+        return score;
     }
 
-    public void setScorePercent(String scorePercent) {
-        this.scorePercent = scorePercent;
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Score score = (Score) o;
-        return Objects.equals(id, score.id) && Objects.equals(userId, score.userId) && Objects.equals(quizId, score.quizId) && Objects.equals(scorePercent, score.scorePercent);
+        Score score1 = (Score) o;
+        return Objects.equals(id, score1.id) && Objects.equals(userId, score1.userId) && Objects.equals(quizId, score1.quizId) && Objects.equals(score, score1.score);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, quizId, scorePercent);
+        return Objects.hash(id, userId, quizId, score);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class Score {
                 "id=" + id +
                 ", userId=" + userId +
                 ", quizId=" + quizId +
-                ", scorePercent='" + scorePercent + '\'' +
+                ", score=" + score +
                 '}';
     }
 }

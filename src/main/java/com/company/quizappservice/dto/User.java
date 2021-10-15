@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = {"username"}))
+@Table(name = "user")
 public class User {
 
     @Id
@@ -27,8 +27,6 @@ public class User {
 
     public User()
     {}
-
-
 
     public User(int id, String username, String password, String firstName, String lastName) {
         this.id = id;

@@ -1,9 +1,10 @@
 package com.company.quizappservice.controller;
 
+import com.company.quizappservice.dao.ScoreDao;
+import com.company.quizappservice.dao.UserDao;
 import com.company.quizappservice.dto.Score;
-import com.company.quizappservice.dto.User;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +13,18 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+
 public class ScoreControllerTest {
 
     @Autowired
@@ -28,17 +32,22 @@ public class ScoreControllerTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    @org.junit.Before
-    public void setUp() throws Exception {
+    @Autowired
+    private ScoreDao scoreDao;
+
+    @Before
+    public void setUp() {
+        scoreDao.deleteAll();
     }
 
     @Test
-    public void shouldAddAScore() throws Exception {
+    @Transactional
+    public void shouldAddAScoreAndGetScoreByUserIdThenByQuizId() throws Exception {
         Score score = new Score();
         score.setId(1);
-        score.setUserId(1);
-        score.setQuizId(1);
-        score.setScorePercent("92%");
+        score.setUserId(45);
+        score.setQuizId(13);
+        score.setScore(92);
 
         String jsonInput = mapper.writeValueAsString(score);
 
@@ -48,7 +57,20 @@ public class ScoreControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(content().json(jsonInput));
+
+        mockMvc.perform(
+                        get("/score/user/45")
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonInput));
+
+        mockMvc.perform(
+                        get("/score/quiz/13")
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonInput));
     }
 
     @Test
@@ -59,4 +81,5 @@ public class ScoreControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
 }
