@@ -3,6 +3,7 @@ package com.company.quizappservice.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +17,8 @@ public class Score {
     private Integer userId;
     private Integer quizId;
     private Integer score;
+
+
 
     public Integer getId() {
         return id;
