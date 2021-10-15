@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,32 +16,32 @@ public class ScoreController {
     @Autowired
     private ScoreDao scoreRepo;
 
-    @CrossOrigin
+
     @PostMapping("/score")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Score createScore(@RequestBody Score score) {
         scoreRepo.save(score);
         return score;
     }
-    @CrossOrigin
+
     @GetMapping("/score")
     public List<Score> getAllScores(){
         return scoreRepo.findAll();
     }
 
-    @CrossOrigin
+
     @GetMapping("/score/quiz/{quizId}")
-    public Score getScoreByQuizId(@PathVariable int quizId){
-        Score score = new Score();
-        score = scoreRepo.findScoreByQuizId(quizId);
-        return score;
+    public List<Score> getScoreByQuizId(@PathVariable int quizId){
+        List<Score> userScore = new ArrayList<>();
+        userScore = scoreRepo.findScoreByQuizId(quizId);
+        return userScore;
     }
-    @CrossOrigin
+
     @GetMapping("/score/user/{userId}")
-    public Score getScoreByUserId(@PathVariable int userId){
-        Score score = new Score();
-        score = scoreRepo.findScoreByUserId(userId);
-        return score;
+    public List<Score> getScoreByUserId(@PathVariable int userId){
+        List<Score> userScore = new ArrayList<>();
+        userScore = scoreRepo.findListOfScoreByUserId(userId);
+        return userScore;
     }
 
 }

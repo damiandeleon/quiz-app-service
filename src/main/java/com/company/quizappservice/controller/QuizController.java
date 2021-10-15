@@ -17,7 +17,7 @@ public class QuizController {
     @Autowired
     private QuizDao quizRepo;
 
-    @CrossOrigin
+
     @GetMapping("/quiz")
     public List<Quiz> getAllQuizzes() {
         return quizRepo.findAll();
@@ -38,6 +38,14 @@ public class QuizController {
         Optional<Quiz> returnQuiz = quizRepo.findById(id);
 
         return returnQuiz;
+    }
+
+    @GetMapping("/quiz/user/{id}")
+    public List<Quiz> getQuizzesByUserId(@PathVariable Integer id) {
+
+        List<Quiz> userQuiz = quizRepo.findByUserId(id);
+
+        return userQuiz;
     }
 
 }

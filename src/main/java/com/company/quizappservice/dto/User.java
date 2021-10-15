@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +26,7 @@ public class User {
     private String firstName;
     @NotNull(message = "a Last Name must be provided")
     private String lastName;
+
 
     public User()
     {}

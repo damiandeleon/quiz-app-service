@@ -3,6 +3,7 @@ package com.company.quizappservice.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -22,6 +23,8 @@ public class Quiz {
     private Integer userId;
     @OneToMany(mappedBy = "quizId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Question> question;
+
+
 
     public Integer getId() {
         return id;
@@ -76,12 +79,12 @@ public class Quiz {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Quiz quiz = (Quiz) o;
-        return Objects.equals(id, quiz.id) && Objects.equals(quizName, quiz.quizName) && Objects.equals(category, quiz.category) && Objects.equals(level, quiz.level) && Objects.equals(userId, quiz.userId);
+        return Objects.equals(id, quiz.id) && Objects.equals(quizName, quiz.quizName) && Objects.equals(category, quiz.category) && Objects.equals(level, quiz.level) && Objects.equals(userId, quiz.userId) && Objects.equals(question, quiz.question);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, quizName, category, level, userId);
+        return Objects.hash(id, quizName, category, level, userId, question);
     }
 
     @Override
