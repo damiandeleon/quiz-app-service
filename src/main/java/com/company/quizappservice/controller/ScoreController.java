@@ -15,31 +15,28 @@ public class ScoreController {
     @Autowired
     private ScoreDao scoreRepo;
 
-    @CrossOrigin
+
     @PostMapping("/score")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Score createScore(@RequestBody Score score) {
         scoreRepo.save(score);
         return score;
     }
-    @CrossOrigin
+
     @GetMapping("/score")
     public List<Score> getAllScores(){
         return scoreRepo.findAll();
     }
 
-    @CrossOrigin
     @GetMapping("/score/quiz/{quizId}")
-    public Score getScoreByQuizId(@PathVariable int quizId){
-        Score score = new Score();
-        score = scoreRepo.findScoreByQuizId(quizId);
+    public List<Score> getScoreByQuizId(@PathVariable int quizId){
+        List<Score> score = scoreRepo.findListOfScoreByQuizId(quizId);
         return score;
     }
-    @CrossOrigin
+
     @GetMapping("/score/user/{userId}")
-    public Score getScoreByUserId(@PathVariable int userId){
-        Score score = new Score();
-        score = scoreRepo.findScoreByUserId(userId);
+    public List<Score> getScoreByUserId(@PathVariable int userId){
+        List<Score> score = scoreRepo.findListOfScoreByUserId(userId);
         return score;
     }
 

@@ -10,6 +10,5 @@ import java.util.List;
 public interface ScoreDao extends JpaRepository<Score, Integer> {
 
     List<Score> findListOfScoreByUserId(Integer userId);
-    Score findScoreByUserId(Integer userId);
-    Score findScoreByQuizId(int quizId);
+    List<Score> findListOfScoreByQuizId(int quizId);
 }
