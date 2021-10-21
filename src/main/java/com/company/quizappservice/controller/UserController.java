@@ -22,8 +22,8 @@ public class UserController {
     @PostMapping("/user")
     @ResponseStatus(value = HttpStatus.CREATED)
     public User createUser(@RequestBody @Valid User user){
-        userRepo.save(user);
-        return user;
+
+        return userRepo.save(user);
     }
 
     @GetMapping("/user")
@@ -32,13 +32,10 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable int id) {
+    public Optional<User> getUserById(@PathVariable int id) {
         Optional<User> user = userRepo.findById(id);
 
-        if (!user.isPresent()) {
-            return null;
-        }
-        return user.get();
+        return userRepo.findById(id);
     }
 
 

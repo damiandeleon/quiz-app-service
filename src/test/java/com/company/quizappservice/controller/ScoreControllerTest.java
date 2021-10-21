@@ -10,11 +10,16 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -32,24 +37,59 @@ public class ScoreControllerTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    @Autowired
+    @MockBean
     private ScoreDao scoreDao;
 
+    private Score daoScore;
+    private String daoJson;
+    private List<Score> allScores = new ArrayList<>();
+    private String allScoresJson;
+    private List<Score> allScores2 = new ArrayList<>();
+    private String allScoresJson2;
+
+
     @Before
-    public void setUp() {
-        scoreDao.deleteAll();
+    public void setUp() throws Exception {
+    daoScore = new Score();
+    daoScore.setId(999);
+    daoScore.setUserId(45);
+    daoScore.setQuizId(13);
+    daoScore.setScore(92);
+
+    daoJson = mapper.writeValueAsString(daoScore);
+
+
+    Score score = new Score();
+    score.setId(23);
+    score.setUserId(45);
+    score.setQuizId(2);
+    score.setScore(88);
+    allScores.add(score);
+    allScores2.add(score);
+
+    Score score2 = new Score();
+    score2.setId(25);
+    score2.setUserId(3);
+    score2.setQuizId(2);
+    score2.setScore(88);
+    allScores.add(score2);
+
+    allScoresJson = mapper.writeValueAsString(allScores);
+    allScoresJson2 = mapper.writeValueAsString(allScores2);
     }
 
     @Test
     @Transactional
     public void shouldAddAScoreAndGetScoreByUserIdThenByQuizId() throws Exception {
-        Score score = new Score();
-        score.setId(1);
-        score.setUserId(45);
-        score.setQuizId(13);
-        score.setScore(92);
+        Score score3 = new Score();
+        score3.setId(1);
+        score3.setUserId(45);
+        score3.setQuizId(13);
+        score3.setScore(92);
 
-        String jsonInput = mapper.writeValueAsString(score);
+        String jsonInput = mapper.writeValueAsString(score3);
+
+        given(scoreDao.save(score3)).willReturn(daoScore);
 
         mockMvc.perform(
                         post("/score")
@@ -60,26 +100,21 @@ public class ScoreControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().json(jsonInput));
 
+        given(scoreDao.findListOfScoreByUserId(45)).willReturn(allScores2);
+
         mockMvc.perform(
                         get("/score/user/45")
                 )
                 .andExpect(status().isOk())
-                .andExpect(content().json(jsonInput));
+                .andExpect(content().json(allScoresJson2));
+
+        given(scoreDao.findListOfScoreByQuizId(2)).willReturn(allScores);
 
         mockMvc.perform(
-                        get("/score/quiz/13")
+                        get("/score/quiz/2")
                 )
                 .andExpect(status().isOk())
-                .andExpect(content().json(jsonInput));
-    }
-
-    @Test
-    public void shouldGetAllScores()throws Exception{
-        mockMvc.perform(
-                        get("/score")
-                )
-                .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(content().json(allScoresJson));
     }
 
 }

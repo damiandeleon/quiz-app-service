@@ -2,27 +2,27 @@ package com.company.quizappservice.controller;
 
 import com.company.quizappservice.dao.UserDao;
 import com.company.quizappservice.dto.User;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import javax.transaction.Transactional;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import static com.sun.xml.internal.ws.policy.sourcemodel.wspolicy.XmlToken.Optional;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -35,23 +35,42 @@ public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @MockBean
+    private UserDao dao;
+
     private ObjectMapper mapper = new ObjectMapper();
 
-    @Autowired
-    private UserDao userDao;
+    private User daoUser;
+    private String daoJson;
+    private List<User> allUsers = new ArrayList<>();
+    private String allUsersJson;
 
-    @org.junit.Before
-    public void setUp() {
+    @Before
+    public void setUp() throws Exception {
+        daoUser = new User();
+        daoUser.setId(22);
+        daoUser.setUsername("number1");
+        daoUser.setPassword("password1");
+        daoUser.setFirstName("Number1");
+        daoUser.setLastName("Person");
+
+        daoJson = mapper.writeValueAsString(daoUser);
+
+        User user = new User();
+        user.setId(555);
+        user.setUsername("number1");
+        user.setPassword("password1");
+        user.setFirstName("Number1");
+        user.setLastName("Person");
+        allUsers.add(user);
+
+        allUsersJson = mapper.writeValueAsString(allUsers);
     }
-
-    // TEST 0
-
-
+    // TEST 1
     @Test
-    public void addListToDataBase() throws Exception {
-
-
+    public void shouldCreateUserWithPostCommand() throws Exception {
         User user1 = new User();
+        user1.setId(22);
         user1.setUsername("number1");
         user1.setPassword("password1");
         user1.setFirstName("Number1");
@@ -59,76 +78,35 @@ public class UserControllerTest {
 
         String user1String = mapper.writeValueAsString(user1);
 
-        mockMvc.perform(
-                post("/user")
-                        .content(user1String)
-                        .contentType(MediaType.APPLICATION_JSON));
-
-        User user2 = new User();
-        user2.setUsername("number2");
-        user2.setPassword("password2");
-        user2.setFirstName("Number2");
-        user2.setLastName("Person");
-
-        String user2String = mapper.writeValueAsString(user2);
-
-        mockMvc.perform(
-                post("/user")
-                        .content(user2String)
-                        .contentType(MediaType.APPLICATION_JSON));
-
-        User user3 = new User();
-        user3.setUsername("number3");
-        user3.setPassword("password3");
-        user3.setFirstName("Number3");
-        user3.setLastName("Person");
-
-        String user3String = mapper.writeValueAsString(user3);
-        mockMvc.perform(
-                post("/user")
-                        .content(user3String)
-                        .contentType(MediaType.APPLICATION_JSON));
-
-        User user4 = new User();
-        user4.setUsername("number4");
-        user4.setPassword("password4");
-        user4.setFirstName("Number4");
-        user4.setLastName("Person");
-
-        String user4String = mapper.writeValueAsString(user4);
-
-
-        mockMvc.perform(
-                post("/user")
-                        .content(user4String)
-                        .contentType(MediaType.APPLICATION_JSON));
-    }
-
-    //TEST 1
-    @Test
-    public void shouldCreateAUserWithPostCommand() throws Exception {
-        User user = new User();
-        user.setUsername("LynnMyers");
-        user.setFirstName("Lynn");
-        user.setLastName("Myers");
-        user.setPassword("password5");
-
-        String jsonInput = mapper.writeValueAsString(user);
+        given(dao.save(user1)).willReturn(daoUser);
 
         mockMvc.perform(
                         post("/user")
-                                .content(jsonInput)
-                                .contentType(MediaType.APPLICATION_JSON)
-                )
-                .andDo(print())
-                .andExpect(status().isCreated());
+                                .content(user1String)
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(content().json(daoJson))
+        ;
     }
 
-    //TEST 2
+    // TEST 2
+    @Test
+    public void shouldReturnUserById() throws Exception {
+
+
+        given(dao.findById(22)).willReturn(java.util.Optional.ofNullable(daoUser));
+        mockMvc.perform(
+                        get("/user/22"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(daoJson));
+
+    }
+
+    // TEST 3
     @Test
     public void shouldUpdateByIdPutMethod() throws Exception {
         User user = new User();
-        user.setId(5);
+        user.setId(555);
         user.setFirstName("Delete");
         user.setLastName("MeLater");
         user.setUsername("deleteMeLater");
@@ -137,7 +115,7 @@ public class UserControllerTest {
         String jsonInput = mapper.writeValueAsString(user);
 
         mockMvc.perform(
-                        put("/user/5")
+                        put("/user/555")
                                 .content(jsonInput)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -145,42 +123,19 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
     }
 
-
-    // TEST 3
+    // TEST 4
     @Test
     public void shouldGetAllUsers() throws Exception {
+
+        given(dao.findAll()).willReturn(allUsers);
 
         mockMvc.perform(
                         get("/user")
                 )
                 .andDo(print())
-                .andExpect(status().isOk());
-    }
-
-
-    // TEST 4
-    @Test
-    public void shouldGetUserById() throws Exception {
-
-        User user3 = new User();
-        user3.setId(3);
-        user3.setUsername("number3");
-        user3.setPassword("password3");
-        user3.setFirstName("Number3");
-        user3.setLastName("Person");
-
-
-        String user3String = mapper.writeValueAsString(user3);
-        mockMvc.perform(
-                        get("/user/3")
-                )
-                .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().json(user3String));
-
+                .andExpect(content().json(allUsersJson));
     }
-
-
 
     //TEST 5
     @Test
@@ -190,7 +145,6 @@ public class UserControllerTest {
                         delete("/user/5"))
                 .andExpect(status().isOk());
     }
-
 
     //TEST 6
     @Test
